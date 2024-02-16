@@ -34,10 +34,6 @@ body {
   background: #555;
 }
 
-.checked {
-    text-decoration: line-through;
-    color: gray;
-}
 
 .container {
     width: 100vw;
@@ -111,6 +107,12 @@ ul li {
     position: relative;
 }
 
+ul li p {
+    color: #bbb;
+    pointer-events: none;
+    transition: 0.5s;
+}
+
 ul li::before {
     content: "";
     position: absolute;
@@ -169,4 +171,9 @@ ul li::before {
 
 .edit-btn:hover {
     color: #64ceff;
+}
+
+.checked {
+    color: #808080;
+    text-decoration: line-through;
 }
