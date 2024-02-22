@@ -166,24 +166,30 @@ async function openTodo(id) {
 
 async function deleteTodo(id) {
     const user = auth.currentUser;
-    await updateDoc(doc(db, "users", user.uid), {
-        [id]: deleteField()
-    });
-    await deleteDoc(doc(db, "todos", id));
-    renderTodos();
+    const todoData = (await getDoc(doc(db, "users", user.uid))).data()[id];
+    const check = prompt(`Enter ${todoData.name} to delete.`);
+    if(check){
+        await updateDoc(doc(db, "users", user.uid), {
+            [id]: deleteField()
+        });
+        await deleteDoc(doc(db, "todos", id));
+        renderTodos();
+    }
 }
 
 async function renameTodo(id) {
     const user = auth.currentUser;
-    const todoData = (await getDoc(doc(db, "users", user.uid))).data()
-    const newName = prompt("Enter new name for the Todo List", todoData[name]);
-    await updateDoc(doc(db, "users", user.uid), {
-        [id]: {
-            id: id,
-            name: newName
-        }
-    });
-    renderTodos();
+    const todoData = (await getDoc(doc(db, "users", user.uid))).data()[id];
+    const newName = prompt("Enter new name for the Todo List", todoData.name);
+    if(((newName !== null) || newName.length === 0)){
+        await updateDoc(doc(db, "users", user.uid), {
+            [id]: {
+                id: id,
+                name: newName
+            }
+        });
+        renderTodos();
+    }
 }
 
 async function createTodo() {
