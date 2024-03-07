@@ -1,5 +1,11 @@
 "use strict";
 
+let pageHasLoaded = false;
+
+document.addEventListener("DOMContentLoaded", function(event){
+    pageHasLoaded = true;
+  });
+
 import { initializeApp } from "firebase/app";
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, setDoc, addDoc, updateDoc, getDoc, deleteDoc, deleteField } from "firebase/firestore";
